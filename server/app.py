@@ -35,7 +35,7 @@ def get_restaurants():
 # Get one restaurant by ID
 @app.route("/restaurants/<int:id>", methods=["GET"])
 def get_restaurant(id):
-    restaurant = Restaurant.query.get(id)
+    restaurant = db.session.get(Restaurant, id)
     if not restaurant:
         return make_response(jsonify({"error": "Restaurant not found"}), 404)
 
@@ -64,7 +64,7 @@ def get_restaurant(id):
 # Delete a restaurant
 @app.route("/restaurants/<int:id>", methods=["DELETE"])
 def delete_restaurant(id):
-    restaurant = Restaurant.query.get(id)
+    restaurant = db.session.get(Restaurant, id)
     if not restaurant:
         return make_response(jsonify({"error": "Restaurant not found"}), 404)
 
